@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="roman_numerals_converter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/roman_numerals_converter_jar</output-path>
+    <root id="archive" name="roman_numerals_converter.jar">
+      <element id="module-output" name="roman_numerals_converter" />
+      <element id="module-test-output" name="roman_numerals_converter" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
