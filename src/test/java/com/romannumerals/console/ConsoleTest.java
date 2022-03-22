@@ -12,48 +12,51 @@ import java.io.PrintStream;
 
 public class ConsoleTest {
 
+    private InputStream stdin = System.in;
+    private PrintStream stdout = System.out;
+
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(byteArrayOutputStream);
+
+    Console consoleApp;
 
     @Test
-    public void checkConvertNumeral(){
-        InputStream stdin = System.in;
-        PrintStream stdout = System.out;
+    public void checkConvertNumeralForOne(){
 
-        System.setIn(new ByteArrayInputStream("3\n4\n".getBytes()));
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(byteArrayOutputStream);
-
+        System.setIn(new ByteArrayInputStream("II\n".getBytes()));
         System.setOut(ps);
 
-        Console.main(new String[0]);
+        consoleApp.main(new String[0]);
+
+        String outputText = byteArrayOutputStream.toString();
+        String key = "number:";
+        String output = outputText.substring(outputText.indexOf(key) + key.length()).trim();
 
         System.setIn(stdin);
         System.setOut(stdout);
 
-        String outputText = byteArrayOutputStream.toString();
-        String key = "output:";
-        String output = outputText.substring(outputText.indexOf(key) + key.length()).trim();
+        //System.out.println(output);
+        //System.out.println(outputText);
 
-        System.out.println(output);
-        System.out.println(outputText);
-
-        Assertions.assertEquals("7", output);
+        Assertions.assertEquals("2", output);
     }
-}
-/*
+
     @Test
-    public void shouldTakeUserInput() {
-        /*
-        //create a mock scanner
-        Scanner mockScanner = mock(Scanner.class);
-        //set up the scanner
-        when(mockScanner.nextLine()).thenReturn("add 5");
-        Console inputOutput= new Console(mockScanner);
-        InputStream stdin = System.in;
-        Scanner scanner = new Scanner(stdin);
-        Console inputOutput= new Console(scanner);
+    public void checkConvertNumeralForInvalid() {
+
+        System.setIn(new ByteArrayInputStream("XV\n".getBytes()));
+        System.setOut(ps);
+
+        consoleApp.main(new String[0]);
+
+        String outputText = byteArrayOutputStream.toString();
+
         System.setIn(stdin);
-        Assertions.assertEquals("add 5", inputOutput.getInput());
+        System.setOut(stdout);
+
+        Assertions.assertTrue(outputText.contains("You entered invalid Roman Numeral: XV"));
+
+    }
+
 }
-}
-*/
+
