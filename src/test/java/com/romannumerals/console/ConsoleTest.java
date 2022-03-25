@@ -12,13 +12,12 @@ import java.io.PrintStream;
 
 public class ConsoleTest {
 
-    private InputStream stdin = System.in;
-    private PrintStream stdout = System.out;
+    private final InputStream stdin = System.in;
+    private final PrintStream stdout = System.out;
 
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     PrintStream ps = new PrintStream(byteArrayOutputStream);
 
-    Console consoleApp;
 
     @Test
     public void checkConvertNumeralForOne(){
@@ -26,7 +25,7 @@ public class ConsoleTest {
         System.setIn(new ByteArrayInputStream("II\n".getBytes()));
         System.setOut(ps);
 
-        consoleApp.main(new String[0]);
+        Console.main(new String[0]);
 
         String outputText = byteArrayOutputStream.toString();
         String key = "number:";
@@ -34,9 +33,6 @@ public class ConsoleTest {
 
         System.setIn(stdin);
         System.setOut(stdout);
-
-        //System.out.println(output);
-        //System.out.println(outputText);
 
         Assertions.assertEquals("2", output);
     }
@@ -47,7 +43,7 @@ public class ConsoleTest {
         System.setIn(new ByteArrayInputStream("XV\n".getBytes()));
         System.setOut(ps);
 
-        consoleApp.main(new String[0]);
+        Console.main(new String[0]);
 
         String outputText = byteArrayOutputStream.toString();
 
